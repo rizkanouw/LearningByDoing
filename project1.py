@@ -14,11 +14,22 @@ print("Welcome to our SNAPE Sesebeuhan!")
 
 print("Here is our menu:")
 for i, item in enumerate(menu, start=1):
-    print(f"{i}. {item} - ${price[item]}")
+    print(f"{i}. {item} - Rp{price[item]}")
 
 total_order = 0
 
-pilihan_1 = input("Please enter the first item you would like to order (Number or Name): ").lower().strip()
+while True:
+    pilihan = input("Enter item (Number/Name), or 'done' to finish ordering: ").lower().strip()
+
+    if pilihan == 'done':
+        break
+
+item = cari_item(pilihan)
+if item:
+    total_order += price[item]
+    print(f"{item} has been added to your order. Total so far:" Rp{total_order}")
+else:
+    print(f"Sorry, {pilihan} is not on the menu.")
 
 item_1 = None
 if pilihan_1.isdigit():
@@ -38,27 +49,6 @@ if item_1 in menu:
 else:
     print(f"Sorry, {pilihan_1} is not on the menu.")
 
-#memasukkan input untuk item kedua
-another_order = input(f"\nDo you want to another item? (y/n): ").strip().lower()
-
-if another_order == "y":
-    pilihan_2 = input("Please enter the second item you would like to order (Number or Name): ").lower().strip()
-    item_2 = None
-    if pilihan_2.isdigit():
-        index = int(pilihan_2) - 1
-        if 0 <= index < len(menu):
-            item_2 = menu[index]
-    else:
-        for m in menu:
-            if m.lower() == pilihan_2:
-                item_2 = m
-                break
-
-    if item_2 in menu:
-        total_order += price[item_2]
-        print(f"{item_2} has been added in your order. Total so far: ${total_order}")
-    else:
-        print(f"Sorry, {pilihan_2} is not on the menu.")
 
 print(f"\nThe total amount of your order is: ${total_order}")
 print("Thank you for dining with us! Enjoy your meal!")
